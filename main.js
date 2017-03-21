@@ -1,4 +1,4 @@
-console.log("I'm pooping")
+
 var batFamily =
 [
    {
@@ -69,29 +69,48 @@ var newFamilyMember = "";
 for (; counter < batFamily.length; counter++) {
   var currentMember = batFamily[counter];
   // Give each person element a unique identifier
-   newFamilyMember += `<div class="person_container col-sm-6 col-md-4" id="person--${counter}">`;
+   newFamilyMember += `<div class="person_container col-sm-6 col-md-4" id="person-${counter}">`;
    newFamilyMember += `<div class="thumbnail">`
    newFamilyMember += `<img src="${currentMember.image}">`;
-   newFamilyMember += `<div class="caption">`;
    newFamilyMember += `<h3>${currentMember.title}</h3>`
-   newFamilyMember += `<p>${currentMember.bio}</p>`
+   newFamilyMember += `<div class="caption">`;
+   newFamilyMember += `<section>${currentMember.bio}</section><br>`
+   newFamilyMember += `<p>Birth: ${currentMember.lifespan.birth}</p>`
+   newFamilyMember += `<p>Death: ${currentMember.lifespan.death}</p>`
    newFamilyMember += `</div></div></div>`;
 
    outputEl.innerHTML = newFamilyMember;
-
-
 }
 
-// Now containerEl will have elements in it
-var containerEl = document.getElementsByClassName("person_container");
+var userInput = document.getElementById("user_input");
+var currentlySelected = document.getElementsByClassName("currentlySelected");
+var personContainer = document.getElementsByClassName("person_container");
+for (var j = 0; j < personContainer.length; j++) {
+  personContainer[j].addEventListener("click", function(){
 
-// Event listeners are created
-for (var i = 0; i < containerEl.length; i++) {
-  containerEl[i].addEventListener("click", function (event) {
-    // Logic to execute when the element is clicked
+    for (var k = 0; k < personContainer.length; k++) {
+      personContainer[k].classList.remove("currentlySelected");
+    }
+    this.classList.add("currentlySelected");
+    userInput.focus();
+// console.log(currentlySelected)
   });
-};
+}
 
+userInput.addEventListener("keypress", function(event){
+  var editBio = currentlySelected[0].childNodes[0].lastChild.firstElementChild;
+  editBio.innerHTML = "";
+  var mimicWords = userInput.value;
+  editBio.innerHTML += mimicWords;
+  console.log(editBio)
+})
+
+userInput.addEventListener("keypress", clearInput);
+function clearInput(e){
+  if (e.keycode === 13) {
+    userInput.value = "";
+  }
+}
 
 
 
