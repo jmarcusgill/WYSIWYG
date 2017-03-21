@@ -3,5 +3,13 @@ body {
 }
 
 .person_container {
-  border: 2px solid black;
+}
+
+h3,
+h1 {
+  text-align: center;
+}
+
+.currentlySelected {
+  border: 1px dotted gold;
 }
