@@ -107,7 +107,7 @@ userInput.addEventListener("keypress", function(event){
 
 userInput.addEventListener("keypress", clearInput);
 function clearInput(e){
-  if (e.keycode === 13) {
+  if (e.keyCode === 13) {
     userInput.value = "";
   }
 }
